@@ -178,7 +178,7 @@ const char* socks5_is_known_auth_method(socks5_method_reply *reply, int do_passw
 		return "Socks5 server reported unexpected auth methods reply version...";
 	else if (reply->method == socks5_auth_invalid)
 		return "Socks5 server refused all our auth methods.";
-	else if (reply->method != socks5_auth_none && !(reply->method == socks5_auth_password && do_password))
+	else if (reply->method != socks5_auth_none && !reply->method == socks5_auth_password && do_password))
 		return "Socks5 server requested unexpected auth method...";
 	else
 		return NULL;
@@ -192,7 +192,7 @@ static void socks5_read_auth_methods(struct bufferevent *buffev, redsocks_client
 	if (redsocks_read_expected(client, buffev->input, &reply, sizes_equal, sizeof(reply)) < 0)
 		return;
 
-	error = socks5_is_known_auth_method(&reply, socks5->do_password);
+	error = socks5_is_known_auth_method(&reply, 1 /*socks5->do_password*/ );
 	if (error) {
 		redsocks_log_error(client, LOG_NOTICE, "socks5_is_known_auth_method: %s", error);
 		redsocks_drop_client(client);
