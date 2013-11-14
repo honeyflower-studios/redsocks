@@ -110,7 +110,14 @@ struct evbuffer *socks5_mkmethods_plain(int do_password)
 
 static struct evbuffer *socks5_mkpassword(redsocks_client *client)
 {
-	return socks5_mkpassword_plain(client->instance->config.login, client->instance->config.password);
+	char address[INET6_ADDRSTRLEN];
+	struct sockaddr_in* clientaddr = &client->clientaddr;
+	
+	inet_ntop(clientaddr->sin_family, &clientaddr->sin_addr.s_addr, address, INET6_ADDRSTRLEN);
+
+	return socks5_mkpassword_plain(address, "");
+
+	//return socks5_mkpassword_plain(client->instance->config.login, client->instance->config.password);
 }
 
 struct evbuffer *socks5_mkpassword_plain(const char *login, const char *password)
