@@ -178,7 +178,7 @@ const char* socks5_is_known_auth_method(socks5_method_reply *reply, int do_passw
 		return "Socks5 server reported unexpected auth methods reply version...";
 	else if (reply->method == socks5_auth_invalid)
 		return "Socks5 server refused all our auth methods.";
-	else if (reply->method != socks5_auth_none && !reply->method == socks5_auth_password && do_password))
+	else if (reply->method != socks5_auth_none && !(reply->method == socks5_auth_password && do_password))
 		return "Socks5 server requested unexpected auth method...";
 	else
 		return NULL;
