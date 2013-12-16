@@ -19,6 +19,7 @@ autoreq: yes
 %attr(755,redsocks,redsocks) "/etc/init.d/redsocks"
 
 %pre
+id -u redsocks &>/dev/null || useradd redsocks
 
 %post
 chkconfig --add redsocks
