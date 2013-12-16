@@ -3,6 +3,8 @@ SRCS := $(OBJS:.o=.c)
 CONF := config.h
 DEPS := .depend
 OUT := redsocks
+RPM := rpm
+RPM_ROOT := $(RPM)/tmp-buildroot
 VERSION := 0.4
 
 LIBS := -levent
@@ -82,8 +84,20 @@ $(OUT): $(OBJS)
 	$(CC) $(CFLAGS) -o $@ $^ $(LDFLAGS) $(LIBS)
 
 clean:
-	$(RM) $(OUT) $(CONF) $(OBJS)
+	$(RM) $(OUT) $(CONF) $(OBJS) 
+	rm -rf $(RPM)
 
 distclean: clean
 	$(RM) tags $(DEPS)
 	$(RM) -r gen
+
+rpm: $(OUT)
+	mkdir $(RPM) $(RPM_ROOT)
+	mkdir $(RPM_ROOT)/usr $(RPM_ROOT)/usr/bin $(RPM_ROOT)/etc $(RPM_ROOT)/etc/init.d
+	cp redsocks $(RPM_ROOT)/usr/bin
+	cp debian/redsocks.conf $(RPM_ROOT)/etc
+	cp debian/init.d $(RPM_ROOT)/etc/init.d/redsocks
+	rpmbuild -bb --define "_topdir ${PWD}/$(RPM)" --buildroot ${PWD}/$(RPM_ROOT) ${PWD}/redsocks.spec
+ifdef KEYNAME
+	./rpm-sign.exp `find $(RPM)/RPMS/ -type f -name redsocks-seabrowser-*.rpm` "$(KEYNAME)" "$(PASSPHRASE)"
+endif

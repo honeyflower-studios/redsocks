@@ -21,6 +21,7 @@ DAEMON=/usr/sbin/redsocks # Introduce the server's location here
 DAEMON_ARGS=""             # Arguments to run the daemon with
 PIDFILE=/var/run/$NAME/$NAME.pid
 SCRIPTNAME=/etc/init.d/$NAME
+CONFFILE=/etc/redsocks.conf
 
 # Exit if the package is not installed
 [ -x $DAEMON ] || exit 0
