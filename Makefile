@@ -93,8 +93,8 @@ distclean: clean
 
 rpm: $(OUT)
 	mkdir $(RPM) $(RPM_ROOT)
-	mkdir $(RPM_ROOT)/usr $(RPM_ROOT)/usr/bin $(RPM_ROOT)/etc $(RPM_ROOT)/etc/init.d
-	cp redsocks $(RPM_ROOT)/usr/bin
+	mkdir $(RPM_ROOT)/usr $(RPM_ROOT)/usr/sbin $(RPM_ROOT)/etc $(RPM_ROOT)/etc/init.d
+	cp redsocks $(RPM_ROOT)/usr/sbin
 	cp debian/redsocks.conf $(RPM_ROOT)/etc
 	cp debian/init.d $(RPM_ROOT)/etc/init.d/redsocks
 	rpmbuild -bb --define "_topdir ${PWD}/$(RPM)" --buildroot ${PWD}/$(RPM_ROOT) ${PWD}/redsocks.spec
