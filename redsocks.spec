@@ -11,6 +11,10 @@ autoreq: yes
 %description
 
 %install
+mkdir $RPM_BUILD_ROOT/usr $RPM_BUILD_ROOT/usr/sbin $RPM_BUILD_ROOT/etc $RPM_BUILD_ROOT/etc/init.d
+cp %_builddir/redsocks $RPM_BUILD_ROOT/usr/sbin
+cp %_builddir/debian/redsocks.conf $RPM_BUILD_ROOT/etc
+cp %_builddir/debian/init.d $RPM_BUILD_ROOT/etc/init.d/redsocks
 
 %files
 %defattr(644,redsocks,redsocks,755)
