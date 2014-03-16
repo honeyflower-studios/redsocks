@@ -8,6 +8,8 @@ Packager: Seabrowser
 autoprov: yes
 autoreq: yes
 
+requires: initscripts, coreutils, sed, chkconfig
+
 %description
 
 %install
