@@ -1,6 +1,6 @@
 Name: redsocks-seabrowser
 Version: 0.4
-Release: 3
+Release: 4
 License: Seabrowser
 Summary: redsocks customized for seabroswer
 Group: Applications/Network
@@ -8,7 +8,7 @@ Packager: Seabrowser
 autoprov: yes
 autoreq: yes
 
-requires: initscripts, coreutils, sed, chkconfig
+requires: initscripts, coreutils, sed, chkconfig, module-init-tools
 
 %description
 
