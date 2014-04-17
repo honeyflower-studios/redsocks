@@ -1,6 +1,6 @@
 Name: redsocks-seabrowser
 Version: 0.4
-Release: 4
+Release: 5
 License: Seabrowser
 Summary: redsocks customized for seabroswer
 Group: Applications/Network
@@ -31,7 +31,8 @@ id -g redsocks &>/dev/null || groupadd redsocks
 id -u redsocks &>/dev/null || useradd -g redsocks -r -s /bin/false redsocks
 
 %post
-sysctl net.ipv4.ip_forward=1
+sed -i "s/^net.ipv4.ip_forward.*$/net.ipv4.ip_forward = 1/g" /etc/sysctl.conf
+service network restart
 service iptables restart
 
 chown redsocks:redsocks /etc/redsocks.conf
