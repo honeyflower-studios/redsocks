@@ -1,6 +1,6 @@
 Name: redsocks-seabrowser
 Version: 0.4
-Release: 5
+Release: 7
 License: Seabrowser
 Summary: redsocks customized for seabroswer
 Group: Applications/Network
